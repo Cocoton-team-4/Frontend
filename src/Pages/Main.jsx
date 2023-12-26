@@ -39,6 +39,7 @@ export default function Main() {
           추억 업로드
         </div>
       </div>
+      <div style={{width: "1300px", height: "2px", backgroundColor: "lightgrey", position: "absolute", left:"15px", marginTop:"60px"}}></div>
       <div className="photos">
         <div className="photoBlock"></div>
         <div className="photoBlock"></div>
