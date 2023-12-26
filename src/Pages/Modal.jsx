@@ -1,38 +1,54 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import axios from "axios"; // axios 추가
 
 const Modal = ({ isOpen, onClose }) => {
-  const [uploadedFile, setUploadedFile] = useState(null);
+  const [file, setFile] = useState(null);
+
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
+  const handleUpload = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const response = await axios.post("/imageupload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      if (response.status === 200) {
+        const result = response.data;
+        console.log("File ID:", result.file_id);
+        // 여기에서 파일 업로드 성공 시 추가적인 동작을 수행할 수 있습니다.
+      } else {
+        console.error("Failed to upload file");
+      }
+    } catch (error) {
+      console.error("Error during file upload:", error);
+    }
+  };
 
   if (!isOpen) return null;
-
-  const handleFileUpload = (event) => {
-    const file = event.target.files[0];
-    setUploadedFile(file);
-  };
 
   return (
     <ModalWrapper>
       <ModalContent>
-        {/* 모달 내용을 여기에 추가 */}
         <div>
           <div className="photoUpload">
             <span className="text">사진 업로드</span>
-            <input className="uploadButton" type="file" onChange={handleFileUpload} />
-            
-          </div>
-          <div>
-            <div>내용</div>
-            <input type="text" />
-          </div>
-          <div>
-            <div>날짜</div>
-            <input type="date" />
+            <input type="file" onChange={handleFileChange} />
+            <button className="uploadButton" onClick={handleUpload}>
+              업로드
+            </button>
           </div>
         </div>
-        <span className="button" onClick={onClose}>
-          X
-        </span>
+        <button className="closeButton" onClick={onClose}>
+          닫기
+        </button>
       </ModalContent>
     </ModalWrapper>
   );
@@ -44,7 +60,7 @@ const ModalWrapper = styled.div`
   left: 0;
   width: 100%;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.5); /* 배경을 어둡게 하는 효과 */
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -66,21 +82,22 @@ const ModalContent = styled.div`
   }
 
   .text {
-    /* 아래로 20px 내림 */
+    margin-right: 20px;
   }
 
   .uploadButton {
-    margin-left: 200px;
+    width: 100px;
     height: 30px;
+    background-color: grey;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  .button {
+  .closeButton {
     position: absolute;
-    left: 1230px;
-    top: 170px;
+    right: 20px;
+    top: 20px;
   }
 `;
 
