@@ -39,7 +39,7 @@ export default function Make() {
           <hr></hr>
         </div>
         <div className="middle">
-          <div className="make">고인정보</div>
+          <div className="make">RE:BORNER정보</div>
         </div>
         <br></br>
         <br></br>
@@ -148,7 +148,7 @@ const MakeDeath = styled.div`
   .make {
     font-size: 20px;
   }
-  .middle{
+  .middle {
     margin-top: 50px;
   }
   .checkinfo1 {

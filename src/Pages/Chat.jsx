@@ -4,6 +4,7 @@ import "../Chat.css";
 
 export default function Chat() {
   const [chat, setChat] = useState("");
+  const [visible, setVisible] = useState(true); // visible 상태값 추가
 
   const onChange = (e) => {
     setChat(e.target.value); // 입력값을 chat 상태로 업데이트
@@ -11,20 +12,20 @@ export default function Chat() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // 서버로 메시지를 보내는 로직 추가
-
-    // chat 값 초기화
-    setChat("");
+    setVisible(true); // 채팅 전송 후 visible 상태를 true로 설정하여 표시
   };
 
   return (
     <div>
       <Container></Container>
-      <ul class="chat-screen_texts">
-        <span>코코</span>
-        <li class="text">고마웠어 잘지내</li>
-        <li class="text">안녕</li>
-      </ul>
+      <ul
+        className={
+          visible ? "chat-screen_texts visible" : "chat-screen_texts hidden"
+        }
+      />
+      <span>코코</span>
+      {visible && <li className="text">{chat}</li>}
+
       <form onSubmit={handleSubmit}>
         <Submit>
           <input
@@ -73,5 +74,9 @@ const Submit = styled.div`
   .submit {
     bottom: 0px;
     border: none;
+  }
+  .span {
+    position: relative;
+    left: 100px;
   }
 `;

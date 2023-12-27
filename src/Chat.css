@@ -1,11 +1,9 @@
 .chat-screen_texts {
-  position: relative;
-  top: 500px;
-  left: 60%;
   padding: 0;
+  position: relative;
+  top: 400px;
+  left: 1000px;
   list-style-type: none;
-  overflow-x: hidden; /* 가로 스크롤 제거 */
-  overflow-y: auto; /* 세로 스크롤 활성화 */
 }
 .chat-screen_texts > .text {
   background-color: yellow;

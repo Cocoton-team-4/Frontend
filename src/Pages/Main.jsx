@@ -6,7 +6,7 @@ import Modal from "./Modal";
 
 export default function Main() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { title } = useParams();
+
   const { state } = useLocation();
   const navigate = useNavigate();
   const openModal = () => {
@@ -20,7 +20,7 @@ export default function Main() {
   return (
     <Mains>
       <div className="container">
-        <div className="photo">사진</div>
+        <div className="photo"></div>
         <div className="grid">
           <div>
             이름
